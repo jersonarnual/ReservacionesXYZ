@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using XYZ.Data;
 
-namespace XYZ.Data.Migrations
+namespace WebApplication1.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -82,6 +82,10 @@ namespace XYZ.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -133,6 +137,8 @@ namespace XYZ.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -219,6 +225,21 @@ namespace XYZ.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("XYZ.Domain.Ciudad", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Ciudad");
+                });
+
             modelBuilder.Entity("XYZ.Domain.Habitacion", b =>
                 {
                     b.Property<int>("Id")
@@ -268,6 +289,9 @@ namespace XYZ.Data.Migrations
                     b.Property<int>("Calificacion")
                         .HasColumnType("int");
 
+                    b.Property<int>("CiudadId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -277,6 +301,9 @@ namespace XYZ.Data.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("TipoHotelId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -284,6 +311,10 @@ namespace XYZ.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CiudadId");
+
+                    b.HasIndex("TipoHotelId");
 
                     b.ToTable("Hotel");
                 });
@@ -330,8 +361,8 @@ namespace XYZ.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ApplicationUserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("ClientId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
@@ -359,7 +390,7 @@ namespace XYZ.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("HabitacionId");
 
@@ -439,26 +470,26 @@ namespace XYZ.Data.Migrations
                     b.ToTable("TipoHabitacion");
                 });
 
-            modelBuilder.Entity("XYZ.Domain.UserAuthentication.ApplicationUser", b =>
+            modelBuilder.Entity("XYZ.Domain.TipoHotel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
+                    b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TipoHotel");
+                });
+
+            modelBuilder.Entity("XYZ.Domain.UserAuthentication.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -466,45 +497,13 @@ namespace XYZ.Data.Migrations
                     b.Property<DateTime?>("LastLoginDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
                     b.Property<bool>("MustChangePassword")
                         .HasColumnType("bit");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TenantId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("applicationUsers");
+                    b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -577,6 +576,25 @@ namespace XYZ.Data.Migrations
                     b.Navigation("TipoHabitacion");
                 });
 
+            modelBuilder.Entity("XYZ.Domain.Hotel", b =>
+                {
+                    b.HasOne("XYZ.Domain.Ciudad", "Ciudad")
+                        .WithMany()
+                        .HasForeignKey("CiudadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("XYZ.Domain.TipoHotel", "TipoHotel")
+                        .WithMany("ListHoteles")
+                        .HasForeignKey("TipoHotelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ciudad");
+
+                    b.Navigation("TipoHotel");
+                });
+
             modelBuilder.Entity("XYZ.Domain.PrecioHabitacion", b =>
                 {
                     b.HasOne("XYZ.Domain.Temporada", "Temporada")
@@ -598,11 +616,9 @@ namespace XYZ.Data.Migrations
 
             modelBuilder.Entity("XYZ.Domain.ReservaHabitacion", b =>
                 {
-                    b.HasOne("XYZ.Domain.UserAuthentication.ApplicationUser", "ApplicationUser")
-                        .WithMany("ReservaHabitaciones")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("XYZ.Domain.UserAuthentication.ApplicationUser", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId");
 
                     b.HasOne("XYZ.Domain.Habitacion", "Habitacion")
                         .WithMany("ReservaHabitacion")
@@ -610,7 +626,7 @@ namespace XYZ.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApplicationUser");
+                    b.Navigation("Client");
 
                     b.Navigation("Habitacion");
                 });
@@ -635,9 +651,9 @@ namespace XYZ.Data.Migrations
                     b.Navigation("PrecioHabitaciones");
                 });
 
-            modelBuilder.Entity("XYZ.Domain.UserAuthentication.ApplicationUser", b =>
+            modelBuilder.Entity("XYZ.Domain.TipoHotel", b =>
                 {
-                    b.Navigation("ReservaHabitaciones");
+                    b.Navigation("ListHoteles");
                 });
 #pragma warning restore 612, 618
         }

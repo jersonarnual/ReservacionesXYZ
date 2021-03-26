@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,15 @@ namespace XYZ.Controllers
             return View(model);
         }
 
-        public ActionResult RegistrarHotel() => View();
+        public ActionResult RegistrarHotel()
+        {
+            HotelViewModel model = new HotelViewModel();
+            var tipoHotel = _hotelService.GetAllTipoHoles();
+            var ciudades = _hotelService.GetAllCiudades();
+            model.ListTipoHotel = new SelectList(tipoHotel, "Id", "Nombre");
+            model.ListCiudades = new SelectList(ciudades, "Id", "Nombre");
+            return View(model);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -47,7 +56,11 @@ namespace XYZ.Controllers
                 {
                     Id = Guid.NewGuid(),
                     Nombre = model.Nombre,
-                    Calificacion = model.Calificacion
+                    Calificacion = model.Calificacion,
+                    TipoHotelId = model.TipoHotelId,
+                    CiudadId = model.CiudadId,
+                    CreateBy = User.Identity.Name,
+                    CreateTime = DateTime.Now
                 };
 
                 var resultado = await _hotelService.RegistrarHotel(hotel);
@@ -73,11 +86,15 @@ namespace XYZ.Controllers
                 TempData["mensaje"] = $"El hotel no se encuentra registrado";
                 return RedirectToAction("Index");
             }
+            var tipoHotel = _hotelService.GetAllTipoHoles();
+            var ciudades = _hotelService.GetAllCiudades();
             HotelViewModel model = new HotelViewModel()
             {
                 Id = hotel.Id,
                 Nombre = hotel.Nombre,
-                Calificacion = hotel.Calificacion
+                Calificacion = hotel.Calificacion,
+                ListTipoHotel = new SelectList(tipoHotel, "Id", "Nombre"),
+                ListCiudades = new SelectList(ciudades, "Id", "Nombre")
             };
             return View(model);
         }
@@ -90,7 +107,11 @@ namespace XYZ.Controllers
             {
                 Id = model.Id,
                 Nombre = model.Nombre,
-                Calificacion = model.Calificacion
+                Calificacion = model.Calificacion,
+                TipoHotelId = model.TipoHotelId,
+                CiudadId = model.CiudadId,
+                UpdateBy = User.Identity.Name,
+                UpdateTime = DateTime.Now
             };
             var resultado = await _hotelService.ActualizarHotel(hotel);
             if (resultado)

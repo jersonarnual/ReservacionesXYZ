@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-sm-12">
             <form asp-action="ActualizarHotel" asp-controller="Hotel" method="post">
-                <input type="hidden"asp-for="Id">
+                <input type="hidden" asp-for="Id">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <div class="col-md-4 mb-3">
@@ -28,6 +28,17 @@
                         <span asp-validation-for="Calificacion" class="text-danger"></span>
                     </div>
                 </div>
+                <div class="col-lg-3 col-sm-6">
+                    <label asp-for="TipoHotelId">Tipo habitacion</label>
+                    <select asp-items="Model.ListTipoHotel" class="form-control" asp-for="TipoHotelId">
+                    </select>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <label asp-for="CiudadId">Ciudad</label>
+                    <select asp-items="Model.ListCiudades" class="form-control" asp-for="CiudadId">
+                    </select>
+                </div>
+                <hr>
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="Editar">
                 </div>

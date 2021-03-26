@@ -21,13 +21,13 @@
             <a class="btn btn-success d-block" asp-action="RegistrarPrecioHabitacion" asp-controller="PrecioHabitacion">Agregar Nueva Precio Habitacion</a>
         </div>
     </div>
-    <div class="row">
+    <hr>
+    <div class="row justify-content-center">
         @if (Model?.ListPrecioHabitaciones.Count() > 0)
         {
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" id="Table">
                 <thead>
                     <tr>
-                        <td>@Html.DisplayNameFor(m => m.Id)</td>
                         <td>@Html.DisplayNameFor(m => m.Precio)</td>
                         <td>@Html.DisplayNameFor(m => m.TemporadaId)</td>
                         <td>@Html.DisplayNameFor(m => m.TipoHabitacionId)</td>
@@ -38,7 +38,6 @@
                     @foreach (var item in Model.ListPrecioHabitaciones)
                     {
                         <tr>
-                            <td>@item.Id</td>
                             <td>@item.Precio</td>
                             <td>@(item?.Temporada?.Tipo)</td>
                             <td>@(item?.TipoHabitaciones?.Nombre)</td>

@@ -42,7 +42,7 @@ namespace XYZ
             services.AddScoped<IReservaHabitacionService, ReservaHabitacionService> ();
             services.AddScoped<ITemporadaService, TemporadaService> ();
             services.AddScoped<ITipoHabitacionService, TipoHabitacionService> ();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddMvc();
         }

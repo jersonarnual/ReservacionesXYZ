@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using XYZ.Domain;
 using XYZ.Domain.UserAuthentication;
-using XYZ.Models;
 
 namespace XYZ.Data
 {
@@ -18,6 +17,8 @@ namespace XYZ.Data
         public DbSet<Temporada> Temporada { get; set; }
         public DbSet<TipoHabitacion> TipoHabitacion { get; set; }
         public DbSet<ReservaHabitacion> ReservaHabitacion { get; set; }
-        public DbSet<ApplicationUser> applicationUsers { get; set; }
+        public DbSet<ApplicationUser> Client { get; set; }
+        public DbSet<TipoHotel> TipoHotel { get; set; }
+        public DbSet<Ciudad> Ciudad { get; set; }
     }
 }

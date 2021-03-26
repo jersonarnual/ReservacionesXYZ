@@ -21,13 +21,13 @@
             <a class="btn btn-success d-block" asp-action="RegistrarTemporada" asp-controller="Temporada">Agregar Nueva Temporada</a>
         </div>
     </div>
-    <div class="row">
+    <hr>
+    <div class="row justify-content-center">
         @if (Model?.ListTemporadas.Count() > 0)
         {
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" id="Table">
                 <thead>
                     <tr>
-                        <td>@Html.DisplayNameFor(m => m.Id)</td>
                         <td>@Html.DisplayNameFor(m => m.FechaInicio)</td>
                         <td>@Html.DisplayNameFor(m => m.FechaFinal)</td>
                         <td>@Html.DisplayNameFor(m => m.Tipo)</td>
@@ -38,7 +38,6 @@
                     @foreach (var item in Model.ListTemporadas)
                     {
                         <tr>
-                            <td>@item?.Id</td>
                             <td>@item?.FechaInicio</td>
                             <td>@(item?.FechaFinal)</td>
                             <td>@(item?.Tipo)</td>

@@ -14,7 +14,8 @@ namespace XYZ.Services
         Task<bool> ActualizarHotel(Hotel model);
         Hotel GetHotelById(Guid? id);
         IEnumerable<Hotel> GetAllHotel();
-
+        IEnumerable<TipoHotel> GetAllTipoHoles();
+        IEnumerable<Ciudad> GetAllCiudades();
     }
     public class HotelService : IHotelService
     {
@@ -53,9 +54,9 @@ namespace XYZ.Services
                 {
                     Id = hotel.Id,
                     Nombre = hotel.Nombre,
-                    Calificacion = hotel.Calificacion
+                    Calificacion = hotel.Calificacion,
+                    TipoHotelId = hotel.TipoHotelId
                 };
-
             }
             return model;
         }
@@ -73,6 +74,16 @@ namespace XYZ.Services
 
                 return false;
             }
+        }
+
+        public IEnumerable<TipoHotel> GetAllTipoHoles()
+        {
+            return _context.TipoHotel.ToList();
+        }
+
+        public IEnumerable<Ciudad> GetAllCiudades()
+        {
+            return _context.Ciudad.OrderBy(x=>x.Nombre).ToList();
         }
     }
 }

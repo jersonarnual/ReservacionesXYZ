@@ -59,7 +59,7 @@ namespace XYZ.Services
                     FechaEntrega = reservaHabitacion.FechaEntrega,
                     FechaSalida = reservaHabitacion.FechaSalida,
                     Excedente = reservaHabitacion.Excedente,
-                    ApplicationUserId = reservaHabitacion.ApplicationUserId,
+                    ClientId = reservaHabitacion.ClientId,
                     HabitacionId = reservaHabitacion.HabitacionId
                 };
             }
