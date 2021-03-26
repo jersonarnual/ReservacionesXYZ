@@ -1,0 +1,78 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using XYZ.Data;
+using XYZ.Domain;
+using XYZ.Models;
+
+namespace XYZ.Services
+{
+    public interface IHotelService
+    {
+        Task<bool> RegistrarHotel(Hotel model);
+        Task<bool> ActualizarHotel(Hotel model);
+        Hotel GetHotelById(Guid? id);
+        IEnumerable<Hotel> GetAllHotel();
+
+    }
+    public class HotelService : IHotelService
+    {
+        private readonly ApplicationDbContext _context;
+        public HotelService(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+        public async Task<bool> ActualizarHotel(Hotel model)
+        {
+            try
+            {
+                _context.Hotel.Update(model);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+        }
+
+        public IEnumerable<Hotel> GetAllHotel()
+        {
+            return _context.Hotel.ToList();
+        }
+
+        public Hotel GetHotelById(Guid? id)
+        {
+            Hotel model = null;
+            if (id != null)
+            {
+                var hotel = _context.Hotel.Find(id);
+                model = new Hotel()
+                {
+                    Id = hotel.Id,
+                    Nombre = hotel.Nombre,
+                    Calificacion = hotel.Calificacion
+                };
+
+            }
+            return model;
+        }
+
+        public async Task<bool> RegistrarHotel(Hotel model)
+        {
+            try
+            {
+                await _context.Hotel.AddAsync(model);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+        }
+    }
+}

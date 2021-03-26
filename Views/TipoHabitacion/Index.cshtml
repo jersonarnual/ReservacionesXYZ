@@ -1,0 +1,67 @@
+﻿@model TipoHabitacionViewModel
+@{
+    ViewData["Title"] = "Tipo Habitacion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @if (TempData["mensaje"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @TempData["mensaje"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    <div class="row">
+        <div class="col-sm-6">
+            <h3> Lista de tipo Habitacion</h3>
+        </div>
+        <div class="col-sm-6">
+            <a class="btn btn-success d-block" asp-action="RegistrarTipoHabitacion" asp-controller="TipoHabitacion">Agregar Tipo Habitacion</a>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model?.ListTipoHabitaciones.Count() > 0)
+        {
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td>@Html.DisplayNameFor(m => m.Id)</td>
+                        <td>@Html.DisplayNameFor(m => m.Nombre)</td>
+                        <td>@Html.DisplayNameFor(m => m.Camas)</td>
+                        <td>@Html.DisplayNameFor(m => m.Capacidad)</td>
+                        <td>@Html.DisplayNameFor(m => m.Banhio)</td>
+                        <td>@Html.DisplayNameFor(m => m.Salon)</td>
+                        <td>@Html.DisplayNameFor(m => m.Terraza)</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ListTipoHabitaciones)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Nombre</td>
+                            <td>@(item.Camas)</td>
+                            <td>@(item.Capacidad)</td>
+                            <td>@(item.Banhio)</td>
+                            <td>@(item.Salon?"Si":"No")</td>
+                            <td>@(item.Terraza?"Si":"No")</td>
+                            <td>
+                                <a asp-controller="TipoHabitacion" asp-action="ActualizarTipoHabitacion" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No se encuentra registros </p>
+        }
+    </div>
+</div>
+
+
+

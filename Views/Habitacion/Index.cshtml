@@ -1,0 +1,61 @@
+﻿@model HabitacionViewModel
+@{
+    ViewData["Title"] = "Lista de Habitaciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    @if (TempData["mensaje"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @TempData["mensaje"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    <div class="row">
+        <div class="col-sm-6">
+            <h3> Lista de Habitaciones</h3>
+        </div>
+        <div class="col-sm-6">
+            <a class="btn btn-success d-block" asp-action="RegistrarHabitacion" asp-controller="Habitacion">Agregar Nueva Habitacion</a>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model.ListHabitaciones.Count() > 0)
+        {
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td>@Html.DisplayNameFor(m => m.Id)</td>
+                        <td>@Html.DisplayNameFor(m => m.Nombre)</td>
+                        <td>@Html.DisplayNameFor(m => m.Disponibilidad)</td>
+                        <td>Hotel</td>
+                        <td>Tipo Habitacion</td>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ListHabitaciones)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Nombre</td>
+                            <td>@(item.Disponibilidad?"Disponible":"Ocupado")</td>
+                            <td>@(item?.Hotel?.Nombre)</td>
+                            <td>@(item?.TipoHabitacion?.Nombre)</td>
+                            <td>
+                                <a asp-controller="Habitacion" asp-action="ActualizarHabitacion" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No se encuentra registros </p>
+        }
+    </div>
+</div>
+

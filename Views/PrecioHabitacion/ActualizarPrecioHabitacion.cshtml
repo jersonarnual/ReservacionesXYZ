@@ -1,0 +1,40 @@
+﻿@model PrecioHabitacionViewModel
+
+@{
+    ViewData["Title"] = "Actualizar Precio Habitacion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Actualizar Precio Habitacion</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="ActualizarPrecioHabitacion">
+            <input type="hidden" asp-for="Id">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-3 col-sm-6">
+                    <label asp-for="TemporadaId">Temporada</label>
+                    <select asp-items="Model?.ListTemporadas" class="form-control" asp-for="TemporadaId">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-3 col-sm-6">
+                    <label asp-for="TipoHabitacionId">Tipo Habitacion</label>
+                    <select asp-items="Model?.ListTipoHabitaciones" class="form-control" asp-for="TipoHabitacionId">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
