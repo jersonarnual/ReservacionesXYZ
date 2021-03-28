@@ -7,7 +7,8 @@ namespace XYZ.Domain
     {
         public Guid Id { get; set; }
         public string Nombre { get; set; }
-        public int Calificacion { get; set; }
+        public string Descripcion { get; set; }
+        public int CupoMaximo { get; set; }
         public Guid TipoHotelId { get; set; }
         public int CiudadId { get; set; }
         public ICollection<Habitacion> Habitaciones { get; set; }

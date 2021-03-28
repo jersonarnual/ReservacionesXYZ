@@ -45,6 +45,7 @@ namespace XYZ.Controllers
                 {
                     Id = Guid.NewGuid(),
                     Nombre = model.Nombre,
+                    Descripcion=model.Descripcion,
                     Camas = model.Camas,
                     Capacidad = model.Capacidad,
                     Banhio = model.Banhio,
@@ -75,6 +76,7 @@ namespace XYZ.Controllers
             {
                 Id = tipoCapacitacion.Id,
                 Nombre = tipoCapacitacion.Nombre,
+                Descripcion= tipoCapacitacion.Descripcion,
                 Camas = tipoCapacitacion.Camas,
                 Capacidad = tipoCapacitacion.Capacidad,
                 Banhio = tipoCapacitacion.Banhio,
@@ -94,6 +96,7 @@ namespace XYZ.Controllers
                 {
                     Id = model.Id,
                     Nombre = model.Nombre,
+                    Descripcion =model.Descripcion,
                     Camas = model.Camas,
                     Capacidad = model.Capacidad,
                     Banhio = model.Banhio,

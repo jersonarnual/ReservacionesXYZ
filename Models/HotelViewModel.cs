@@ -12,8 +12,9 @@ namespace XYZ.Models
         public Guid Id { get; set; }
         [Display(Name ="Nombre Hotel")]
         public string Nombre { get; set; }
-        [Display(Name = "Calificacion Del Hotel")]
-        public int Calificacion { get; set; }
+        [Display(Name = "Descripcion")]
+        public string  Descripcion { get; set; }
+        public int CupoMaximo { get; set; }
         public Guid TipoHotelId { get; set; }
         public int CiudadId { get; set; }
         public SelectList ListTipoHotel { get; set; }

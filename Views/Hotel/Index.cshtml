@@ -28,7 +28,8 @@
                 <thead>
                     <tr>
                         <td>@Html.DisplayNameFor(m => m.Nombre)</td>
-                        <td>@Html.DisplayNameFor(m => m.Calificacion)</td>
+                        <td>@Html.DisplayNameFor(m => m.Descripcion)</td>
+                        <td>@Html.DisplayNameFor(m => m.CupoMaximo)</td>
                         <td>Acciones</td>
                     </tr>
                 </thead>
@@ -37,7 +38,8 @@
                     {
                         <tr>
                             <td>@item.Nombre</td>
-                            <td>@item.Calificacion</td>
+                            <td>@item.Descripcion</td>
+                            <td>@item.CupoMaximo</td>
                             <td>
                                 <a asp-controller="Hotel" asp-action="ActualizarHotel" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
                             </td>

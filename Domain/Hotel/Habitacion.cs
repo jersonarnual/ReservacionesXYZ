@@ -7,7 +7,6 @@ namespace XYZ.Domain
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public bool Disponibilidad { get; set; }
         public Guid TipoHabitacionId { get; set; }
         public Guid HotelId { get; set; }
         public virtual TipoHabitacion TipoHabitacion { get; set; }

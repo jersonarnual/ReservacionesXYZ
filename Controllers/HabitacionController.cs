@@ -53,7 +53,7 @@ namespace XYZ.Controllers
             HabitacionViewModel model = new HabitacionViewModel();
             var listTipoHabitacion = _tipoHabitacionService.GetAllTipoHabitacion();
             var listHoteles = _hotelService.GetAllHotel();
-            model.ListaTipoHabitacion = new SelectList(listTipoHabitacion, "Id", "Nombre");
+            model.ListaTipoHabitacion = new SelectList(listTipoHabitacion, "Id", "Descripcion");
             model.ListaHoteles = new SelectList(listHoteles, "Id", "Nombre");
             return View(model);
         }
@@ -67,7 +67,6 @@ namespace XYZ.Controllers
                 Habitacion habitacion = new Habitacion()
                 {
                     Nombre = model.Nombre,
-                    Disponibilidad = true,
                     TipoHabitacionId = model.TipoHabitacionId,
                     HotelId = model.HotelId,
                     CreateTime = DateTime.Now,
@@ -98,10 +97,9 @@ namespace XYZ.Controllers
             {
                 Id = habitacion.Id,
                 Nombre = habitacion.Nombre,
-                Disponibilidad = habitacion.Disponibilidad,
                 TipoHabitacionId = habitacion.TipoHabitacionId,
                 HotelId = habitacion.HotelId,
-                ListaTipoHabitacion = new SelectList(listTipoHabitacion, "Id", "Nombre"),
+                ListaTipoHabitacion = new SelectList(listTipoHabitacion, "Id", "Descripcion"),
                 ListaHoteles = new SelectList(listHoteles, "Id", "Nombre")
             };
             return View(model);
@@ -117,7 +115,6 @@ namespace XYZ.Controllers
                 {
                     Id = model.Id,
                     Nombre = model.Nombre,
-                    Disponibilidad = model.Disponibilidad,
                     TipoHabitacionId = model.TipoHabitacionId,
                     HotelId = model.HotelId,
                     UpdateTime = DateTime.Now,

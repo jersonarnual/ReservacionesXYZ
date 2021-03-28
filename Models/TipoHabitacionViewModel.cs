@@ -12,6 +12,7 @@ namespace XYZ.Models
         public string Nombre { get; set; }
         public int Camas { get; set; }
         public int Capacidad { get; set; }
+        public string Descripcion{ get; set; }
         public int Banhio { get; set; }
         public bool Salon { get; set; }
         public bool Terraza { get; set; }

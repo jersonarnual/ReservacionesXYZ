@@ -56,7 +56,8 @@ namespace XYZ.Controllers
                 {
                     Id = Guid.NewGuid(),
                     Nombre = model.Nombre,
-                    Calificacion = model.Calificacion,
+                    Descripcion = model.Descripcion,
+                    CupoMaximo= model.CupoMaximo,
                     TipoHotelId = model.TipoHotelId,
                     CiudadId = model.CiudadId,
                     CreateBy = User.Identity.Name,
@@ -92,7 +93,8 @@ namespace XYZ.Controllers
             {
                 Id = hotel.Id,
                 Nombre = hotel.Nombre,
-                Calificacion = hotel.Calificacion,
+                Descripcion = hotel.Descripcion,
+                CupoMaximo= hotel.CupoMaximo,
                 ListTipoHotel = new SelectList(tipoHotel, "Id", "Nombre"),
                 ListCiudades = new SelectList(ciudades, "Id", "Nombre")
             };
@@ -107,7 +109,8 @@ namespace XYZ.Controllers
             {
                 Id = model.Id,
                 Nombre = model.Nombre,
-                Calificacion = model.Calificacion,
+                Descripcion = model.Descripcion,
+                CupoMaximo=model.CupoMaximo,
                 TipoHotelId = model.TipoHotelId,
                 CiudadId = model.CiudadId,
                 UpdateBy = User.Identity.Name,

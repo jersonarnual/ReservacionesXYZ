@@ -20,5 +20,6 @@ namespace XYZ.Data
         public DbSet<ApplicationUser> Client { get; set; }
         public DbSet<TipoHotel> TipoHotel { get; set; }
         public DbSet<Ciudad> Ciudad { get; set; }
+        public DbSet<EstadoReserva> EstadoReserva { get; set; }
     }
 }

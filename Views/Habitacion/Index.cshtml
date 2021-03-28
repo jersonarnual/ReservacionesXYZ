@@ -30,7 +30,6 @@
                     <tr>
                         <td>@Html.DisplayNameFor(m => m.Id)</td>
                         <td>@Html.DisplayNameFor(m => m.Nombre)</td>
-                        <td>@Html.DisplayNameFor(m => m.Disponibilidad)</td>
                         <td>Hotel</td>
                         <td>Tipo Habitacion</td>
                         <td>Acciones</td>
@@ -42,7 +41,6 @@
                         <tr>
                             <td>@item.Id</td>
                             <td>@item.Nombre</td>
-                            <td>@(item.Disponibilidad?"Disponible":"Ocupado")</td>
                             <td>@(item?.Hotel?.Nombre)</td>
                             <td>@(item?.TipoHabitacion?.Nombre)</td>
                             <td>

@@ -19,11 +19,18 @@ namespace XYZ.Services
     }
     public class HotelService : IHotelService
     {
+        #region Miembro
         private readonly ApplicationDbContext _context;
+        #endregion
+
+        #region Constructor
         public HotelService(ApplicationDbContext context)
         {
             _context = context;
         }
+        #endregion
+
+        #region metodos
         public async Task<bool> ActualizarHotel(Hotel model)
         {
             try
@@ -54,7 +61,7 @@ namespace XYZ.Services
                 {
                     Id = hotel.Id,
                     Nombre = hotel.Nombre,
-                    Calificacion = hotel.Calificacion,
+                    Descripcion = hotel.Descripcion,
                     TipoHotelId = hotel.TipoHotelId
                 };
             }
@@ -83,7 +90,8 @@ namespace XYZ.Services
 
         public IEnumerable<Ciudad> GetAllCiudades()
         {
-            return _context.Ciudad.OrderBy(x=>x.Nombre).ToList();
-        }
+            return _context.Ciudad.OrderBy(x => x.Nombre).ToList();
+        } 
+        #endregion
     }
 }

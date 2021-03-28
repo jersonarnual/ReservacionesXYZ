@@ -13,6 +13,11 @@
         <div class="col-sm-12">
             <form asp-action="RegistrarHotel" asp-controller="Hotel" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-lg-3 col-sm-6">
+                    <label asp-for="TipoHotelId"></label>
+                    <select asp-items="Model.ListTipoHotel" class="form-control" asp-for="TipoHotelId">
+                    </select>
+                </div>
                 <div class="form-group">
                     <div class="col-md-4 mb-3">
                         <label asp-for="Nombre" class="control-label"></label>
@@ -22,18 +27,20 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-4 mb-3">
-                        <label asp-for="Calificacion" class="control-label"></label>
-                        <input type="number" asp-for="Calificacion" class="form-control" placeholder="Calificacion" min="0" max="5">
-                        <span asp-validation-for="Calificacion" class="text-danger"></span>
+                        <label asp-for="Descripcion" class="control-label"></label>
+                        <input type="text" asp-for="Descripcion" class="form-control" placeholder="Descripcion">
+                        <span asp-validation-for="Descripcion" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="CupoMaximo" class="control-label"></label>
+                        <input type="text" asp-for="CupoMaximo" class="form-control" placeholder="Cupo Maximo">
+                        <span asp-validation-for="CupoMaximo" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
-                    <label asp-for="TipoHotelId">Tipo habitacion</label>
-                    <select asp-items="Model.ListTipoHotel" class="form-control" asp-for="TipoHotelId">
-                    </select>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <label asp-for="CiudadId">Ciudad</label>
+                    <label asp-for="CiudadId"></label>
                     <select asp-items="Model.ListCiudades" class="form-control" asp-for="CiudadId">
                     </select>
                 </div>

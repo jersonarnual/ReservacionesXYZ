@@ -56,7 +56,6 @@ namespace XYZ.Services
                 {
                     Id = habitacion.Id,
                     Nombre = habitacion.Nombre,
-                    Disponibilidad = habitacion.Disponibilidad,
                     TipoHabitacionId = habitacion.TipoHabitacionId,
                     HotelId=habitacion.HotelId
                 };
